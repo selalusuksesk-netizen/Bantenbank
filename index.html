@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jawara Mobile - Welcome</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            text-align: center;
+            background: radial-gradient(circle at 0% 0%, #e0f2fe 0%, transparent 40%);
+        }
+
+        .header-lang {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .flag {
+            width: 24px;
+            height: 16px;
+            background: linear-gradient(to bottom, #FF0000 50%, #FFFFFF 50%);
+            border: 1px solid #ddd;
+            border-radius: 2px;
+        }
+
+        .logo-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-logo {
+            max-width: 280px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        .footer-info {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .bank-logo {
+            width: 160px;
+        }
+
+        .disclaimer {
+            font-size: 10.5px;
+            color: #666;
+            line-height: 1.5;
+            max-width: 320px;
+        }
+
+        .btn-masuk {
+            width: 100%;
+            max-width: 340px;
+            background-color: #0081C9;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 129, 201, 0.3);
+            text-decoration: none;
+            display: block;
+        }
+
+        .btn-masuk:active {
+            transform: scale(0.97);
+            background-color: #006da8;
+        }
+
+        .version {
+            font-size: 11px;
+            color: #999;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-lang">
+        ID <div class="flag"></div>
+    </div>
+
+    <div class="logo-container">
+        <img src="https://i.ytimg.com/vi/e_Xb2GCHyLc/maxresdefault.jpg" alt="Jawara Mobile" class="main-logo">
+    </div>
+
+    <div class="footer-info">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/BankBanten.png" alt="Bank Banten" class="bank-logo">
+        
+        <p class="disclaimer">
+            Bank Banten berizin dan diawasi oleh<br>
+            <strong>Otoritas Jasa Keuangan (OJK)</strong> dan <strong>Bank Indonesia (BI)</strong>,<br>
+            serta merupakan peserta penjaminan <strong>LPS</strong>
+        </p>
+
+        <a href="formulir.html" class="btn-masuk">MASUK</a>
+        
+        <p class="version">Versi 1.4.1.04092025</p>
+    </div>
+
+</body>
+</html>
